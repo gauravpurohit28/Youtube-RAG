@@ -1,8 +1,15 @@
-export default function AnswerBox({ answer }) {
+import React from "react";
+import ReactMarkdown from "react-markdown";
+
+function AnswerBox({ answer }) {
   return (
-    <div className="bg-white p-4 rounded-lg shadow">
-      <h2 className="font-semibold text-gray-700 mb-2">Answer:</h2>
-      <p className="text-gray-800">{answer}</p>
+    <div className="bg-white rounded shadow p-4 mt-4">
+      <h2 className="font-bold mb-2 text-lg">Answer:</h2>
+      <div className="prose">
+        <ReactMarkdown>{answer}</ReactMarkdown>
+      </div>
     </div>
   );
 }
+
+export default AnswerBox;

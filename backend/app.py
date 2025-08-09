@@ -5,22 +5,22 @@ from youtube_transcript_api._errors import TranscriptsDisabled, NoTranscriptFoun
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
-import numpy as np
 import faiss
+import numpy as np
+import dotenv
 import os
 
-# ✅ Configure Gemini API key
-os.environ["GOOGLE_API_KEY"] = "AIzaSyBK-VZXAI3kHufzyuCKcbQ5vWv9X9eFX68"
-genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
+dotenv.load_dotenv()  
 
-# ✅ Flask app setup
+#Gemini API key
+genai.configure(api_key=os.getenv("GOOGLE_API_KEY"))
+
 app = Flask(__name__)
 CORS(app)
 
-# ✅ In-memory store
 video_store = {}
 
-# --- Utility Functions ---
+
 def fetch_transcript(video_id):
     try:
         fetched = YouTubeTranscriptApi().fetch(video_id, languages=["en"])
@@ -78,7 +78,7 @@ def ask_gemini(video_id, question):
     response = model.generate_content(prompt)
     return response.text
 
-# --- API Routes ---
+
 @app.route("/api/load_video", methods=["POST"])
 def load_video():
     data = request.json
@@ -105,7 +105,7 @@ def ask_question():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# ✅ Run server
+
 if __name__ == "__main__":
     print("Starting Flask server...")
     app.run(port=5000, debug=True)
