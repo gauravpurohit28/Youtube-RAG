@@ -5,6 +5,12 @@ Paste a YouTube URL or ID, load the video, and get instant, context-aware answer
 
 ---
 
+<p align="center">
+  <img src="frontend/src/assets/image.png" alt="YouTube RAG App Screenshot" width="800"/>
+</p>
+
+---
+
 ## 🚀 Features
 
 - 🎥 **YouTube Transcript Extraction**  
@@ -119,3 +125,5 @@ npm start
 ## 📜 License
 
 Gaurav Purohit
+
+update this for picture, the picture is in frontend/src/assets named image.png
