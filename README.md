@@ -125,5 +125,3 @@ npm start
 ## 📜 License
 
 Gaurav Purohit
-
-update this for picture, the picture is in frontend/src/assets named image.png
