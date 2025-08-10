@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
+import Header from "./components/header";
 import VideoInput from "./components/VideoInput";
 import QuestionInput from "./components/QuestionInput";
 import AnswerBox from "./components/AnswerBox";

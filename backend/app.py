@@ -6,7 +6,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
 import faiss
-import numpy as np
+import numpy as np 
 import dotenv
 import os
 
