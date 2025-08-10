@@ -47,7 +47,8 @@ export default function VideoInput({ onSubmit }) {
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
             className="rounded-lg"
-          ></iframe>
+          >
+          </iframe>
         </div>
       )}
     </div>

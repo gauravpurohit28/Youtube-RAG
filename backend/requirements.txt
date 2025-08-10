@@ -1,7 +1,9 @@
 flask
 flask-cors
-google-generativeai
 youtube-transcript-api
 langchain
-chromadb
-tiktoken
+sentence-transformers
+faiss-cpu
+python-dotenv
+google-generativeai
+numpy
