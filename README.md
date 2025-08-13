@@ -119,6 +119,7 @@ npm start
 ## 🔑 Environment Variables
 
 - `GOOGLE_API_KEY` (in `backend/.env`): Your Google Gemini API key.
+- - `YOUTUBE_API_KEY` (in `backend/.env`): Your Youtube API key.
 
 ---
 
