@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import Header from "./components/Header";
+import Header from "./components/header";
 import VideoPlayer from "./components/VideoPlayer";
 import SearchBar from "./components/SearchBar";
 import VideoInput from "./components/VideoInput";
