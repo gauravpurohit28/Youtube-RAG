@@ -137,9 +137,14 @@ def ask_gemini(video_id, question):
 
     prompt = f"""
 You are an assistant that answers questions based strictly on the provided video transcript excerpts.
-Summarize the key points from the context that are relevant to the question. 
-Avoid unnecessary details, speculation, or information not in the context. 
-Keep the answer clear, concise, and directly focused on the question.
+
+From the context below, identify and summarize all the key points that answer the question.
+If multiple points are mentioned, list them in a clear, well-structured format (bullet points or numbered list).
+Where helpful, briefly expand on each point using the details present in the transcript — 
+but do NOT add any information that is not in the context.
+
+Be as informative as possible while remaining faithful to the transcript.
+
 
 Context:
 {context}
@@ -154,7 +159,6 @@ Answer (concise summary based only on the above context):
     response = model.generate_content(prompt)
     answer_text = response.text.strip() if hasattr(response, 'text') else str(response).strip()
 
-    # Return answer + retrieved sources for linking in frontend
     return answer_text, retrieved
 
 

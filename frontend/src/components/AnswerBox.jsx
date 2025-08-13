@@ -13,17 +13,17 @@ export default function AnswerBox({ answer = "", sources, onSeek }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded shadow">
+    <div className="bg-white p-4 rounded shadow h-[900px] flex flex-col overflow-y-auto">
       <h4 className="font-semibold">Answer</h4>
 
-      <div className="mt-2 whitespace-pre-wrap">
+      <div className="mt-2 whitespace-pre-wrap flex-1 ">
         {answer || "No answer available."}
       </div>
 
       {safeSources.length > 0 && (
         <>
           <h5 className="mt-4 font-medium">Sources</h5>
-          <div className="mt-2 space-y-2">
+          <div className="mt-2 space-y-2 flex-1 ">
             {safeSources.map((s, idx) => (
               <div key={idx} className="p-2 border rounded">
                 <div className="text-sm text-gray-600">

@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
-import Header from "./components/header";
+import Header from "./components/Header";
+import VideoPlayer from "./components/VideoPlayer";
+import SearchBar from "./components/SearchBar";
 import VideoInput from "./components/VideoInput";
 import QuestionInput from "./components/QuestionInput";
 import AnswerBox from "./components/AnswerBox";
 import Loader from "./components/Loader";
-import VideoPlayer from "./components/VideoPlayer";
-import SearchBar from "./components/SearchBar";
 
-const API_BASE = "http://127.0.0.1:5000/api";
+const API_BASE = "https://youtube-rag-backend-8j6y.onrender.com/api";
 
 function App() {
   const [videoId, setVideoId] = useState("");
@@ -88,44 +88,47 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 flex flex-col">
       <Header />
+      <main className="flex-1 flex flex-col md:flex-row gap-6 px-4 py-6 max-w-7xl mx-auto w-full">
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto mt-6">
-        
-        
-        <div className="bg-white rounded-lg shadow p-4 min-h-[300px] flex items-center justify-center">
-          {videoId ? (
-            <div className="w-full">
+        <section className="flex-1 flex flex-col items-center">
+          <div className="w-full max-w-2xl aspect-video bg-black rounded-lg flex items-center justify-center mb-4">
+            {loading && (
+              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-white gap-3 z-10">
+                <Loader />
+                <span className="text-sm">Loading video...</span>
+              </div>
+            )}
+            {videoId ? (
               <VideoPlayer ref={playerRef} videoId={videoId} />
-            </div>
-          ) : (
-            <p className="text-gray-400">No video loaded</p>
-          )}
-        </div>
+            ) : (
+              !loading && <p className="text-gray-400">No video loaded</p>
+            )}
+          </div>
+          <div className="w-full max-w-2xl space-y-3">
+            <SearchBar apiBase={API_BASE} onSelect={handleSearchSelect} disabled={loading} />
+            <VideoInput onSubmit={handleVideoSubmit} disabled={loading} />
+            {status && <p className="text-sm text-gray-700">{status}</p>}
+          </div>
+        </section>
 
-        
-        <div className="bg-white rounded-lg shadow p-4 flex flex-col gap-4">
-          <SearchBar apiBase={API_BASE} onSelect={handleSearchSelect} disabled={loading} />
-          <VideoInput onSubmit={handleVideoSubmit} disabled={loading} />
-          {status && <p className="text-sm text-gray-700">{status}</p>}
-          {loading && <Loader />}
-        </div>
-
-        <div className="bg-white rounded-lg shadow p-4 flex flex-col gap-4">
+        <aside className="flex-1 flex flex-col space-y-4">
           <QuestionInput
             question={question}
             setQuestion={setQuestion}
             onAsk={handleAskQuestion}
             disabled={loading}
           />
-          {answer ? (
-            <AnswerBox answer={answer} sources={sources} onSeek={seekTo} />
-          ) : (
-            <p className="text-gray-400">No answer yet</p>
-          )}
-        </div>
-      </div>
+          <div className="bg-white rounded-xl shadow-lg p-4 flex-1 overflow-y-auto">
+            {answer ? (
+              <AnswerBox answer={answer} sources={sources} onSeek={seekTo} />
+            ) : (
+              <p className="text-gray-400">No answer yet</p>
+            )}
+          </div>
+        </aside>
+      </main>
     </div>
   );
 }
