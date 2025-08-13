@@ -25,10 +25,10 @@ EMBED_MODEL_NAME = 'all-MiniLM-L6-v2'
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 
-def fetch_transcript_entries(video_id, proxy=None):
+def fetch_transcript_entries(video_id):
     try:
         ytt_api = YouTubeTranscriptApi()
-        entries = ytt_api.fetch(video_id, languages=['en'], proxies=proxy)
+        entries = ytt_api.fetch(video_id, languages=['en'])
         return entries
 
     except TranscriptsDisabled:
