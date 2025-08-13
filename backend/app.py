@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from youtube_transcript_api import YouTubeTranscriptApi
+from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound, CouldNotRetrieveTranscript
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
@@ -25,12 +25,19 @@ EMBED_MODEL_NAME = 'all-MiniLM-L6-v2'
 CHUNK_SIZE = 500
 CHUNK_OVERLAP = 50
 
-def fetch_transcript_entries(video_id):
+def fetch_transcript_entries(video_id, proxy=None):
     try:
-        ytt_api=YouTubeTranscriptApi()
-        entries = ytt_api.fetch(video_id, languages=['en'])
+        ytt_api = YouTubeTranscriptApi()
+        entries = ytt_api.fetch(video_id, languages=['en'], proxies=proxy)
         return entries
 
+    except TranscriptsDisabled:
+        raise Exception("Transcript fetch error: Captions are disabled for this video.")
+    except NoTranscriptFound:
+        raise Exception("Transcript fetch error: No transcript available in the requested language.")
+    except CouldNotRetrieveTranscript:
+        raise Exception("Transcript fetch error: YouTube is blocking requests from your IP. "
+                        "Consider using a proxy or run locally.")
     except Exception as e:
         raise Exception(f"Transcript fetch error: {e}")
 
