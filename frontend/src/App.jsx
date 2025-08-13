@@ -7,7 +7,7 @@ import QuestionInput from "./components/QuestionInput";
 import AnswerBox from "./components/AnswerBox";
 import Loader from "./components/Loader";
 
-const API_BASE = "https://youtube-rag-backend-8j6y.onrender.com/api";
+const API_BASE = "https://youtube-rag-jyg1.onrender.com/api";
 
 function App() {
   const [videoId, setVideoId] = useState("");
