@@ -1,7 +1,7 @@
 # 🎬 YouTube-RAG
 
-Ask questions about any YouTube video using Retrieval-Augmented Generation (RAG) powered by Google Gemini and semantic search.  
-Paste a YouTube URL or ID, load the video, and get instant, context-aware answers!
+Ask questions about any YouTube video using Retrieval-Augmented Generation (RAG) powered by Google Gemini and semantic search.
+Paste a YouTube URL or ID, load the video, and get instant, context-aware answers — with clickable timestamps to jump straight to the relevant part of the video!
 
 ---
 
@@ -21,6 +21,9 @@ Paste a YouTube URL or ID, load the video, and get instant, context-aware answer
 
 - 🔍 **Vector Search with FAISS**  
   Finds the most relevant transcript chunks for your question.
+
+- ⏱ **Clickable Timestamps in Sources**
+  Every answer includes sources with timestamps so you can jump directly to that moment in the video.
 
 - 🤖 **RAG with Gemini**  
   Uses Google Gemini to generate answers based on the transcript context.
@@ -114,6 +117,7 @@ npm start
 1. **Enter a YouTube URL or ID** and click "Load".
 2. **Ask a question** about the video content.
 3. **View the answer** rendered with Markdown formatting.
+4. Use the timestamped sources to jump directly to the relevant point in the video.
 
 ---
 
