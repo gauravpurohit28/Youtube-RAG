@@ -15,7 +15,6 @@ const VideoPlayer = forwardRef(({ videoId }, ref) => {
   useEffect(() => {
     if (!videoId) return;
 
-    // Load YouTube API if not already loaded
     if (!window.YT) {
       const tag = document.createElement("script");
       tag.src = "https://www.youtube.com/iframe_api";
@@ -48,7 +47,7 @@ const VideoPlayer = forwardRef(({ videoId }, ref) => {
   }, [videoId]);
 
   return (
-    <div className="w-full aspect-video bg-black rounded-xl overflow-hidden border border-[#2a2a2a] shadow-[0_10px_30px_rgba(0,0,0,0.35)]">
+    <div className="w-full aspect-video bg-black rounded overflow-hidden">
       <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
     </div>
   );
