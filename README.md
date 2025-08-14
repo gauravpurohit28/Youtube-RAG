@@ -91,6 +91,7 @@ pip install -r requirements.txt
 - Create a `.env` file in `backend/`:
   ```
   GOOGLE_API_KEY=your_gemini_api_key_here
+  YOUTUBE_API_KEY=your_youtube_api_key_here
   ```
 
 - Start the backend server:
@@ -119,7 +120,7 @@ npm start
 ## 🔑 Environment Variables
 
 - `GOOGLE_API_KEY` (in `backend/.env`): Your Google Gemini API key.
-- - `YOUTUBE_API_KEY` (in `backend/.env`): Your Youtube API key.
+- `YOUTUBE_API_KEY` (in `backend/.env`): Your Youtube API key.
 
 ---
 
