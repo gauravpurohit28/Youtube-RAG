@@ -1,27 +1,24 @@
-import { PlayCircleIcon, ChatBubbleLeftRightIcon } from "@heroicons/react/24/solid";
+import { PlayCircleIcon } from "@heroicons/react/24/solid";
 
 export default function Header() {
   return (
-    <header className="flex flex-col items-center gap-3 py-6 bg-gradient-to-r from-red-500 to-red-700 text-white shadow-lg rounded-b-2xl">
-      {/* Icon Row */}
-      <div className="flex items-center gap-2">
-        <PlayCircleIcon className="w-12 h-12 text-white drop-shadow-md" />
-        <ChatBubbleLeftRightIcon className="w-10 h-10 text-white drop-shadow-md" />
-      
+    <header className="fixed top-0 inset-x-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-[#202020]/70 bg-[#202020]/90 border-b border-[#2a2a2a]">
+      <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="flex items-center gap-3">
+          <div className="w-9 h-9 rounded-md bg-[#ff0000] grid place-items-center shadow-[0_0_24px_rgba(255,0,0,0.35)]">
+            <PlayCircleIcon className="w-6 h-6 text-white" />
+          </div>
+          <div className="leading-tight">
+            <div className="text-white font-bold text-lg tracking-tight">YouTube RAG</div>
+            <div className="text-[#aaaaaa] text-[12px]">Ask questions with AI + transcripts</div>
+          </div>
+        </div>
 
-      {/* Title */}
-      <div>
-      <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight drop-shadow-sm">
-        YouTube RAG Assistant
-      </h1>
-      <p className="text-lg md:text-xl text-gray-100 max-w-2xl text-center">
-        Ask context-aware questions about any YouTube video — powered by AI.
-      </p>
+        <div className="hidden md:flex items-center gap-4 text-sm text-[#aaaaaa]">
+          <span className="hover:text-white transition-colors">Docs</span>
+          <span className="hover:text-white transition-colors">GitHub</span>
+        </div>
       </div>
-      </div>
-
-      {/* Subtitle */}
-      
     </header>
   );
 }

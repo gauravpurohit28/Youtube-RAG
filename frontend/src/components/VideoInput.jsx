@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function VideoInput({ onSubmit }) {
+export default function VideoInput({ onSubmit, disabled }) {
   const [url, setUrl] = useState("");
   const [previewId, setPreviewId] = useState("");
 
@@ -19,25 +19,27 @@ export default function VideoInput({ onSubmit }) {
   };
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow space-y-4 w-full">
-      <div className="flex space-x-2">
+    <div className="card p-4 md:p-5 space-y-4 w-full">
+      <div className="flex gap-2">
         <input
           type="text"
-          placeholder="Enter YouTube URL or ID"
+          placeholder="Paste YouTube URL or ID"
           value={url}
           onChange={(e) => setUrl(e.target.value)}
-          className="flex-grow border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
+          disabled={disabled}
+          className="input-dark flex-grow rounded-md px-4 py-3 outline-none focus:ring-2 focus:ring-[#ff0000]/60 transition disabled:opacity-60 disabled:cursor-not-allowed"
         />
         <button
           onClick={handleSubmit}
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+          disabled={disabled}
+          className="btn-red px-4 md:px-5 py-2.5 rounded-md font-medium whitespace-nowrap disabled:opacity-60 disabled:cursor-not-allowed"
         >
-          Load
+          Load Video
         </button>
       </div>
 
       {previewId && (
-        <div className="aspect-w-16 aspect-h-9">
+        <div className="rounded-lg overflow-hidden border border-[#2a2a2a]">
           <iframe
             width="100%"
             height="315"
@@ -46,7 +48,6 @@ export default function VideoInput({ onSubmit }) {
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
-            className="rounded-lg"
           >
           </iframe>
         </div>

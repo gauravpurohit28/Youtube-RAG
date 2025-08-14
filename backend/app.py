@@ -162,7 +162,7 @@ Question:
 Answer (concise summary based only on the above context):
 """
 
-    model = genai.GenerativeModel('models/gemini-2.0-flash')
+    model = genai.GenerativeModel('models/gemini-2.5-pro')
     response = model.generate_content(prompt)
     answer_text = response.text.strip() if hasattr(response, 'text') else str(response).strip()
 

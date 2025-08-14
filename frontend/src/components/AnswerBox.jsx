@@ -14,27 +14,27 @@ export default function AnswerBox({ answer = "", sources, onSeek }) {
   };
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-lg max-h-[900px] flex flex-col overflow-y-auto">
-      <h3 className="text-xl font-bold text-gray-800 border-b pb-2">Answer</h3>
+    <div className="card p-5 md:p-6 max-h-[900px] flex flex-col overflow-y-auto fade-in">
+      <h3 className="text-xl font-bold text-white border-b border-[#2a2a2a] pb-2">Answer</h3>
 
-      <div className="mt-4 flex-1 prose prose-sm sm:prose-base">
+      <div className="mt-4 flex-1 prose prose-invert prose-p:leading-relaxed prose-headings:text-white prose-strong:text-white prose-a:text-[#ff4d4d]">
         {answer ? <ReactMarkdown>{answer}</ReactMarkdown> : "No answer available."}
       </div>
 
       {safeSources.length > 0 && (
         <div className="mt-6">
-          <h4 className="font-semibold text-gray-700 mb-3 border-b pb-1">Sources</h4>
+          <h4 className="font-semibold text-[#dddddd] mb-3 border-b border-[#2a2a2a] pb-1">Sources</h4>
           <div className="space-y-3">
             {safeSources.map((s, idx) => (
               <div
                 key={idx}
-                className="p-3 border rounded-lg bg-gray-50 hover:bg-gray-100 transition"
+                className="p-3 border border-[#2a2a2a] rounded-lg bg-[#1c1c1c] hover:bg-[#232323] transition"
               >
-                <div className="text-sm text-gray-600">{s.text || "No source text"}</div>
+                <div className="text-sm text-[#c7c7c7]">{s.text || "No source text"}</div>
                 {typeof s.start === "number" && (
                   <div className="mt-2">
                     <button
-                      className="text-blue-600 text-sm font-medium hover:underline"
+                      className="link-red text-sm font-medium"
                       onClick={() => onSeek(Math.floor(s.start))}
                     >
                       Jump to {fmt(s.start)}

@@ -49,7 +49,7 @@ function App() {
     if (!videoId) return setStatus("Load a video first.");
     if (!question.trim()) return setStatus("Enter a question.");
 
-    setLoading(true);
+    // setLoading(true);
     setAnswer("");
     setSources([]);
     setStatus("Fetching answer...");
@@ -88,28 +88,28 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col">
+    <div className="min-h-screen flex flex-col">
       <Header />
-      <main className="flex-1 flex flex-col md:flex-row gap-6 px-4 py-6 max-w-7xl mx-auto w-full">
-
+      <main className="flex-1 flex flex-col md:flex-row gap-6 px-4 pt-24 pb-8 max-w-7xl mx-auto w-full">
         <section className="flex-1 flex flex-col items-center">
-          <div className="w-full max-w-2xl aspect-video bg-black rounded-lg flex items-center justify-center mb-4">
-            {loading && (
-              <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center text-white gap-3 z-10">
-                <Loader />
-                <span className="text-sm">Loading video...</span>
-              </div>
-            )}
+          <div className="relative w-full max-w-2xl mb-4">
             {videoId ? (
               <VideoPlayer ref={playerRef} videoId={videoId} />
             ) : (
-              !loading && <p className="text-gray-400">No video loaded</p>
+              <div className="w-full aspect-video bg-[#101010] rounded-xl border border-[#2a2a2a] grid place-items-center text-[#666666]">
+                {!loading && <p>No video loaded</p>}
+              </div>
+            )}
+            {loading && (
+              <div className="absolute inset-0 bg-black/50 grid place-items-center text-white gap-3 z-10 rounded-xl">
+                <Loader />
+              </div>
             )}
           </div>
           <div className="w-full max-w-2xl space-y-3">
             <SearchBar apiBase={API_BASE} onSelect={handleSearchSelect} disabled={loading} />
             <VideoInput onSubmit={handleVideoSubmit} disabled={loading} />
-            {status && <p className="text-sm text-gray-700">{status}</p>}
+            {status && <p className="text-sm text-[#aaaaaa]">{status}</p>}
           </div>
         </section>
 
@@ -120,11 +120,11 @@ function App() {
             onAsk={handleAskQuestion}
             disabled={loading}
           />
-          <div className="bg-white rounded-xl shadow-lg p-4 flex-1 overflow-y-auto">
+          <div className="card p-4 flex-1 overflow-y-auto">
             {answer ? (
               <AnswerBox answer={answer} sources={sources} onSeek={seekTo} />
             ) : (
-              <p className="text-gray-400">No answer yet</p>
+              <p className="text-[#777777]">No answer yet</p>
             )}
           </div>
         </aside>

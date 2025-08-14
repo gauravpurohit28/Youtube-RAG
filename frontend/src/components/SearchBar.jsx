@@ -21,26 +21,26 @@ export default function SearchBar({ apiBase, onSelect, disabled }) {
   };
 
   return (
-    <div className="bg-white p-3 rounded shadow">
+    <div className="card p-4 md:p-5">
       <div className="flex gap-2">
         <input
-          className="flex-1 p-2 border rounded"
+          className="input-dark flex-1 rounded-md px-4 py-3 outline-none focus:ring-2 focus:ring-[#ff0000]/60 transition disabled:opacity-60 disabled:cursor-not-allowed"
           placeholder="Search YouTube videos..."
           value={q}
           onChange={(e) => setQ(e.target.value)}
           disabled={disabled}
         />
-        <button className="px-3 py-2 bg-blue-600 text-white rounded" onClick={doSearch} disabled={disabled || loading}>
+        <button className="btn-red px-4 py-2.5 rounded-md font-medium disabled:opacity-60 disabled:cursor-not-allowed" onClick={doSearch} disabled={disabled || loading}>
           {loading ? "Searching..." : "Search"}
         </button>
       </div>
-      <div className="mt-3 space-y-2">
+      <div className="mt-4 space-y-2 max-h-64 overflow-y-auto">
         {results.map((it) => (
-          <div key={it.videoId} className="flex items-center gap-3 cursor-pointer" onClick={() => onSelect(it.videoId)}>
+          <div key={it.videoId} className="flex items-center gap-3 cursor-pointer p-2 rounded hover:bg-[#2a2a2a] transition" onClick={() => onSelect(it.videoId)}>
             <img src={it.thumbnail} alt="" className="w-20 h-12 object-cover rounded" />
             <div>
-              <div className="font-medium">{it.title}</div>
-              <div className="text-sm text-gray-500">{it.channelTitle}</div>
+              <div className="font-medium text-white line-clamp-2">{it.title}</div>
+              <div className="text-sm text-[#aaaaaa]">{it.channelTitle}</div>
             </div>
           </div>
         ))}
