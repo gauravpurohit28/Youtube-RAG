@@ -1,7 +1,7 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
 
-export default function AnswerBox({ answer = "", sources, onSeek }) {
+export default function AnswerBox({ answer = "", sources, onSeek, loading, Loader }) {
   const safeSources = Array.isArray(sources) ? sources : [];
 
   // format seconds -> mm:ss
@@ -18,7 +18,13 @@ export default function AnswerBox({ answer = "", sources, onSeek }) {
       <h3 className="text-xl font-bold text-white border-b border-[#2a2a2a] pb-2">Answer</h3>
 
       <div className="mt-4 flex-1 prose prose-invert prose-p:leading-relaxed prose-headings:text-white prose-strong:text-white prose-a:text-[#ff4d4d]">
-        {answer ? <ReactMarkdown>{answer}</ReactMarkdown> : "No answer available."}
+        {loading ? (
+          <Loader />
+        ) : answer ? (
+          <ReactMarkdown>{answer}</ReactMarkdown>
+        ) : (
+          <span className="text-gray-300">No answer yet</span>
+        )}
       </div>
 
       {safeSources.length > 0 && (

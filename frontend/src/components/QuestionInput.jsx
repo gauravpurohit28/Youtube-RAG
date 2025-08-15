@@ -9,7 +9,7 @@ export default function QuestionInput({ question, setQuestion, onAsk, disabled }
           placeholder="Ask something about the video..."
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
-          rows={4}
+          rows={2}
           disabled={disabled}
           className="input-dark w-full rounded-md px-4 py-3 outline-none focus:ring-2 focus:ring-[#ff0000]/60 transition disabled:opacity-60 disabled:cursor-not-allowed"
         />

@@ -1,6 +1,6 @@
 import React, { forwardRef, useImperativeHandle, useRef, useEffect } from "react";
 
-const VideoPlayer = forwardRef(({ videoId }, ref) => {
+const VideoPlayer = forwardRef(({ videoId, loading, Loader }, ref) => {
   const playerRef = useRef(null);
   const containerRef = useRef(null);
 
@@ -47,8 +47,8 @@ const VideoPlayer = forwardRef(({ videoId }, ref) => {
   }, [videoId]);
 
   return (
-    <div className="w-full aspect-video bg-black rounded overflow-hidden">
-      <div ref={containerRef} style={{ width: "100%", height: "100%" }} />
+    <div className="w-full max-w-2xl aspect-video bg-black rounded-lg flex items-center justify-center">
+      {loading ? <Loader /> : <div ref={containerRef} style={{ width: "100%", height: "100%" }} />}
     </div>
   );
 });

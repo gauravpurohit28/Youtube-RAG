@@ -15,8 +15,7 @@ export default function Header() {
         </div>
 
         <div className="hidden md:flex items-center gap-4 text-sm text-[#aaaaaa]">
-          <span className="hover:text-white transition-colors">Docs</span>
-          <span className="hover:text-white transition-colors">GitHub</span>
+          <a href="https://github.com/gauravpurohit28/Youtube-RAG"className="hover:text-white transition-colors">GitHub</a>
         </div>
       </div>
     </header>
