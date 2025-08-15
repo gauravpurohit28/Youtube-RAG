@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-from youtube_transcript_api import YouTubeTranscriptApi, TranscriptsDisabled, NoTranscriptFound, CouldNotRetrieveTranscript
+from youtube_transcript_api import YouTubeTranscriptApi
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from sentence_transformers import SentenceTransformer
 import google.generativeai as genai
@@ -27,17 +27,10 @@ CHUNK_OVERLAP = 50
 
 def fetch_transcript_entries(video_id):
     try:
-        ytt_api = YouTubeTranscriptApi()
+        ytt_api=YouTubeTranscriptApi()
         entries = ytt_api.fetch(video_id, languages=['en'])
         return entries
 
-    except TranscriptsDisabled:
-        raise Exception("Transcript fetch error: Captions are disabled for this video.")
-    except NoTranscriptFound:
-        raise Exception("Transcript fetch error: No transcript available in the requested language.")
-    except CouldNotRetrieveTranscript:
-        raise Exception("Transcript fetch error: YouTube is blocking requests from your IP. "
-                        "Consider using a proxy or run locally.")
     except Exception as e:
         raise Exception(f"Transcript fetch error: {e}")
 
@@ -45,11 +38,12 @@ import re
 
 def build_chunks_with_timestamps(entries, chunk_size=CHUNK_SIZE, chunk_overlap=CHUNK_OVERLAP):
     """
-    Build transcript chunks with timestamps.
+    Build transcript chunks with timestamps using LangChain's RecursiveCharacterTextSplitter.
     Ensures chunks end at sentence boundaries, avoids cutting words,
     and preserves overlap using whole sentences for context.
     """
 
+    # Step 1: Convert transcript entries into (sentence, start_time) pairs
     sentences_with_time = []
     for entry in entries:
         if isinstance(entry, dict):
@@ -61,12 +55,12 @@ def build_chunks_with_timestamps(entries, chunk_size=CHUNK_SIZE, chunk_overlap=C
         if not text:
             continue
 
-        # Split transcript text into sentences
         sentences = re.split(r'(?<=[.!?]) +', text)
         for s in sentences:
             if s.strip():
                 sentences_with_time.append((s.strip(), start))
 
+    # Step 2: Group sentences into timestamped chunks (manual overlap handling)
     chunks = []
     current_sentences = []
     current_start = None
@@ -83,10 +77,9 @@ def build_chunks_with_timestamps(entries, chunk_size=CHUNK_SIZE, chunk_overlap=C
             current_length += len(sentence) + 1
             i += 1
         else:
-            # Save current chunk
             chunks.append({"text": " ".join(current_sentences), "start": current_start})
 
-            # Overlap: keep last N characters worth of sentences
+            # Handle overlap manually (keep whole sentences for context)
             overlap_chars = 0
             overlap_sentences = []
             for s_text in reversed(current_sentences):
@@ -102,6 +95,21 @@ def build_chunks_with_timestamps(entries, chunk_size=CHUNK_SIZE, chunk_overlap=C
 
     if current_sentences:
         chunks.append({"text": " ".join(current_sentences), "start": current_start or 0})
+
+    # Step 3: Run LangChain text splitter inside each chunk for finer splitting (if needed)
+    splitter = RecursiveCharacterTextSplitter(
+        chunk_size=chunk_size,
+        chunk_overlap=0,  # Already handled manually above
+        separators=["\n\n", "\n", ". ", "? ", "! ", " ", ""]
+    )
+
+    processed_chunks = []
+    for ch in chunks:
+        sub_chunks = splitter.split_text(ch["text"])
+        for sub in sub_chunks:
+            processed_chunks.append({"text": sub.strip(), "start": ch["start"]})
+
+    chunks = processed_chunks  # Keep the return variable name the same
 
     return chunks
 
@@ -162,7 +170,7 @@ Question:
 Answer (concise summary based only on the above context):
 """
 
-    model = genai.GenerativeModel('models/gemini-2.5-pro')
+    model = genai.GenerativeModel('models/gemini-2.0-flash')
     response = model.generate_content(prompt)
     answer_text = response.text.strip() if hasattr(response, 'text') else str(response).strip()
 
