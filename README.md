@@ -13,37 +13,38 @@ Paste a YouTube URL or ID, load the video, and get instant, context-aware answer
 
 ## 🚀 Features
 
-- 🎥 **YouTube Transcript Extraction**  
+- 🎥 **YouTube Transcript Extraction**  </br>
   Fetches and processes English transcripts from YouTube videos.
 
-- 🧩 **Semantic Chunking & Embedding**  
-  Splits transcripts and embeds them for efficient semantic search.
+- 🧩 **Semantic Chunking & Embedding** </br>
+  Uses LangChain’s RecursiveCharacterTextSplitter to split transcripts into context-preserving chunks before embedding for efficient semantic search.
 
-- 🔍 **Vector Search with FAISS**  
+- 🔍 **Vector Search with FAISS**  </br>
   Finds the most relevant transcript chunks for your question.
 
-- ⏱ **Clickable Timestamps in Sources**
+- ⏱ **Clickable Timestamps in Sources** </br>
   Every answer includes sources with timestamps so you can jump directly to that moment in the video.
 
-- 🤖 **RAG with Gemini**  
+- 🤖 **RAG with Gemini**  </br>
   Uses Google Gemini to generate answers based on the transcript context.
 
-- 💻 **Modern React Frontend**  
+- 💻 **Modern React Frontend**  </br>
   Clean UI, Markdown rendering, and loading indicators.
 
 ---
 
 ## 🛠️ Tech Stack
 
-<p align="center">
-  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/>
-  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white"/>
-  <img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/>
-  <img src="https://img.shields.io/badge/FAISS-009688?style=for-the-badge&logo=none"/>
-  <img src="https://img.shields.io/badge/Sentence_Transformers-4B32C3?style=for-the-badge&logo=none"/>
-  <img src="https://img.shields.io/badge/Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white"/>
-  <img src="https://img.shields.io/badge/YouTube_Transcript_API-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/>
+<p align="center"> 
+<img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB"/> 
+<img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white"/> 
+<img src="https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white"/> 
+<img src="https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white"/> 
+<img src="https://img.shields.io/badge/FAISS-009688?style=for-the-badge&logo=none"/>
+<img src="https://img.shields.io/badge/LangChain-121212?style=for-the-badge&logo=none"/> 
+<img src="https://img.shields.io/badge/Sentence_Transformers-4B32C3?style=for-the-badge&logo=none"/> 
+<img src="https://img.shields.io/badge/Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white"/> 
+<img src="https://img.shields.io/badge/YouTube_Transcript_API-FF0000?style=for-the-badge&logo=youtube&logoColor=white"/> 
 </p>
 
 ---
