@@ -108,7 +108,7 @@ pip install -r requirements.txt
 ```sh
 cd ../frontend
 npm install
-npm start
+npm run dev
 ```
 
 ---
